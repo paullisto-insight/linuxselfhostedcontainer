@@ -12,7 +12,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommend
     jq \
     lsb-release \
     software-properties-common \
-    python2-minimal
+    python2-minimal \
+    python-pip
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
