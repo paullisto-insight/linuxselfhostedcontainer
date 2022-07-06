@@ -1,5 +1,4 @@
 FROM ubuntu:20.04
-RUN DEBIAN_FRONTEND=noninteractive apt-add-repository universe
 RUN DEBIAN_FRONTEND=noninteractive apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
