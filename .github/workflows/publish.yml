@@ -46,5 +46,5 @@ jobs:
         with:
           context: 'dockeragent'
           push: true
-          tags: 'main'
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
