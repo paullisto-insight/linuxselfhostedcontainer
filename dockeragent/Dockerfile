@@ -1,21 +1,26 @@
-FROM ubuntu:20.04
-RUN DEBIAN_FRONTEND=noninteractive apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
+FROM ubuntu:18.04
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
-    apt-transport-https \
-    apt-utils \
+# To make it easier for build and release pipelines to run apt-get,
+# configure apt to not require confirmation (assume the -y argument by default)
+ENV DEBIAN_FRONTEND=noninteractive
+RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
+    jq \
     git \
     iputils-ping \
-    jq \
-    lsb-release \
-    software-properties-common \
-    python2-minimal \
-    python2-pip
+    libcurl4 \
+    libicu60 \
+    libunwind8 \
+    netcat \
+    libssl1.0 \
+    python-pip
+  && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+RUN curl -LsS https://aka.ms/InstallAzureCLIDeb | bash \
+  && rm -rf /var/lib/apt/lists/*
 
 # Can be 'linux-x64', 'linux-arm64', 'linux-arm', 'rhel.6-x64'.
 ENV TARGETARCH=linux-x64
