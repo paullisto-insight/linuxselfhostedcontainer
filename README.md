@@ -7,3 +7,5 @@ You can set up a self-hosted agent in Azure Pipelines to run inside a Windows Se
 This is useful when you want to run agents with outer orchestration, such as Azure Container Instances.
 
 Building on Ubuntu 18.04
+
+Testing latest tag
