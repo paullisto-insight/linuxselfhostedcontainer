@@ -33,7 +33,7 @@ jobs:
           
       - name: Remove Tag
         run: |
-          if [[ "$(docker images -q ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest 2> /dev/null)" == "" ]]; then
+          if [[ "$(docker images -q ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest 2> /dev/null)" != "" ]]; then
             docker rmi ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           fi
           
