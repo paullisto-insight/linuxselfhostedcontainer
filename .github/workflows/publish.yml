@@ -30,6 +30,10 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Remove Tag
+        run: |
+          docker rmi ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -42,5 +46,5 @@ jobs:
         with:
           context: 'dockeragent'
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           labels: ${{ steps.meta.outputs.labels }}
