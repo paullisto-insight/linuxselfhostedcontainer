@@ -6,4 +6,3 @@ requests>=2.17.3
 tabulate>=0.7.7
 six>=1.10.0
 urllib3>=1.26.7,<3
-configparser>=0.3.5;python_version < "3.6"
