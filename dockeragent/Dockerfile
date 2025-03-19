@@ -14,8 +14,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommend
     software-properties-common \
     openssh-client \
     python3-pip \
-    gnupg \
-    terraform
+    gnupg
 
 RUN wget -O- https://apt.releases.hashicorp.com/gpg | \
     gpg --dearmor | \
