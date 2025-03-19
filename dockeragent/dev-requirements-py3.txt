@@ -1,2 +1,4 @@
 -r ./dev-requirements.txt
 prospector[with_pyroma]
+
+prospector==1.7.7
