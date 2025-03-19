@@ -1,3 +1,4 @@
+
 # Databricks CLI
 # Copyright 2017 Databricks, Inc.
 #
@@ -21,18 +22,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import imp
 import io
 import os
 from setuptools import setup, find_packages
+from importlib.machinery import SourceFileLoader
 
-version = imp.load_source(
-    'databricks_cli.version', os.path.join('databricks_cli', 'version.py')).version
+path_to_module = os.path.join('databricks_cli', 'version.py')
+loaded_module = SourceFileLoader('databricks_cli.version', path_to_module).load_module()
+version = loaded_module.version
 
 setup(
     name='databricks-cli',
     version=version,
     packages=find_packages(include=['databricks_cli*']),
+    python_requires=">=3.7",
     install_requires=[
         # Note: please keep this in sync with `requirements.txt`.
         'click>=7.0',
@@ -41,11 +44,11 @@ setup(
         'requests>=2.17.3',
         'tabulate>=0.7.7',
         'six>=1.10.0',
-        'configparser>=0.3.5;python_version < "3.6"',
+        'urllib3>=1.26.7,<3'
     ],
     entry_points='''
         [console_scripts]
-        databricks=databricks_cli.cli:cli
+        databricks=databricks_cli.cli:main
         dbfs=databricks_cli.dbfs.cli:dbfs_group
     ''',
     zip_safe=False,
@@ -57,10 +60,15 @@ setup(
     classifiers=[
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.6',
         'License :: OSI Approved :: Apache Software License',
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
     ],
     keywords='databricks cli',
-    url='https://github.com/databricks/databricks-cli'
+    url='https://github.com/databricks/databricks-cli',
+    options={'bdist_wheel': {'universal': True}},
 )
