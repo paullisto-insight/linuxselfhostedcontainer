@@ -5,3 +5,13 @@ mock
 decorator
 requests_mock
 rstcheck
+
+# More recent versions of these linters introduce rules that make it fail.
+# Pin these versions to keep the ruleset fixed.
+dodgy==0.2.1
+flake8==4.0.1
+flake8-polyfill==1.0.2
+mccabe==0.6.1
+pycodestyle==2.8.0
+pyflakes==2.4.0
+pylint==2.13.9
